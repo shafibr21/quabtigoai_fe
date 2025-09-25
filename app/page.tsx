@@ -26,7 +26,7 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen weather-gradient flex items-center justify-center">
-      <div className="container mx-auto px-4 py-8 flex flex-col h-full ">
+      <div className="container mx-auto px-4 py-1 md:py-8 flex flex-col h-full ">
         <WeatherHeader title="Weather Today" units={units} onUnitsChange={setUnits} />
 
         <div className="flex-1 flex flex-col items-center justify-center text-center">
