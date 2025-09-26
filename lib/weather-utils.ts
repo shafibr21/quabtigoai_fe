@@ -43,3 +43,11 @@ export function getCurrentDayName(): string {
     weekday: "long",
   })
 }
+
+export function getTemperatureUnit(units: "metric" | "imperial"): string {
+  return units === "metric" ? "C" : "F"
+}
+
+export function getWindSpeedUnit(units: "metric" | "imperial"): string {
+  return units === "metric" ? "m/s" : "mph"
+}

@@ -38,7 +38,7 @@ export default function WeatherPage() {
     if (city) {
       fetchWeatherData(city);
     }
-  }, [city]);
+  }, [city, units]); // Added units dependency
 
   const fetchWeatherData = async (cityName: string) => {
     setIsLoading(true);
@@ -46,8 +46,8 @@ export default function WeatherPage() {
 
     try {
       const [weatherData, forecastData] = await Promise.all([
-        getCurrentWeather(cityName),
-        getForecast(cityName),
+        getCurrentWeather(cityName, units), // Pass units parameter
+        getForecast(cityName, units), // Pass units parameter
       ]);
 
       setWeather(weatherData);
@@ -119,14 +119,22 @@ export default function WeatherPage() {
         </div>
 
         {weather && forecast && (
-          <div className="max-w-[80vw] mx-auto flex flex-col md:flex-row gap-8 justify-center">
-            <div className="mb-8 space-y-6">
-              <CurrentWeather weather={weather} />
-              <WeatherStats weather={weather} />
-              <DailyForecast forecast={forecast} />
-            </div>
-            <div className="mb-8 space-y-6">
-              <HourlyForecast forecast={forecast} />
+          <div className="w-full max-w-7xl mx-auto px-2 sm:px-4">
+            <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 lg:gap-8">
+              {/* Left column */}
+              <div className="flex-1 space-y-4 sm:space-y-6">
+                <CurrentWeather weather={weather} units={units} />
+                <WeatherStats weather={weather} units={units} />
+                <div className="block lg:hidden">
+                  <HourlyForecast forecast={forecast} units={units} />
+                </div>
+                <DailyForecast forecast={forecast} units={units} />
+              </div>
+
+              {/* Right column - desktop only */}
+              <div className="hidden lg:block lg:w-80 xl:w-96">
+                <HourlyForecast forecast={forecast} units={units} />
+              </div>
             </div>
           </div>
         )}

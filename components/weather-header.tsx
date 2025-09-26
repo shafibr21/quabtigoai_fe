@@ -1,13 +1,19 @@
-import { Sun } from "lucide-react"
-import { UnitsDropdown } from "./units-dropdown"
+import { Sun } from "lucide-react";
+import { UnitsDropdown } from "./units-dropdown";
 
 interface WeatherHeaderProps {
-  title: string
-  units: "metric" | "imperial"
-  onUnitsChange: (units: "metric" | "imperial") => void
+  title: string;
+  units: "metric" | "imperial";
+  onUnitsChange: (units: "metric" | "imperial") => void;
 }
 
-export function WeatherHeader({ title, units, onUnitsChange }: WeatherHeaderProps) {
+export function WeatherHeader({
+  title,
+  units,
+  onUnitsChange,
+}: WeatherHeaderProps) {
+  console.log("WeatherHeader rendered with units:", units);
+
   return (
     <header className="flex items-center justify-between w-full mb-8">
       <div className="flex items-center gap-2">
@@ -16,5 +22,5 @@ export function WeatherHeader({ title, units, onUnitsChange }: WeatherHeaderProp
       </div>
       <UnitsDropdown units={units} onUnitsChange={onUnitsChange} />
     </header>
-  )
+  );
 }

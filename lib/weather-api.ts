@@ -48,8 +48,8 @@ export interface ForecastData {
   }
 }
 
-export async function getCurrentWeather(city: string): Promise<WeatherData> {
-  const response = await fetch(`${BASE_URL}/weather?q=${encodeURIComponent(city)}&appid=${API_KEY}&units=metric`)
+export async function getCurrentWeather(city: string, units: "metric" | "imperial" = "metric"): Promise<WeatherData> {
+  const response = await fetch(`${BASE_URL}/weather?q=${encodeURIComponent(city)}&appid=${API_KEY}&units=${units}`)
 
   if (!response.ok) {
     throw new Error("City not found")
@@ -58,8 +58,8 @@ export async function getCurrentWeather(city: string): Promise<WeatherData> {
   return response.json()
 }
 
-export async function getForecast(city: string): Promise<ForecastData> {
-  const response = await fetch(`${BASE_URL}/forecast?q=${encodeURIComponent(city)}&appid=${API_KEY}&units=metric`)
+export async function getForecast(city: string, units: "metric" | "imperial" = "metric"): Promise<ForecastData> {
+  const response = await fetch(`${BASE_URL}/forecast?q=${encodeURIComponent(city)}&appid=${API_KEY}&units=${units}`)
 
   if (!response.ok) {
     throw new Error("City not found")
